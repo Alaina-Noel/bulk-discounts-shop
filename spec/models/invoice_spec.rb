@@ -131,6 +131,10 @@ RSpec.describe Invoice, type: :model do
         expect(alaina_invoice1.calculate_invoice_revenue).to eq(183600) 
         expect(alaina_invoice1.calculate_discounted_invoice_revenue).to eq(28080)
       end
+
+      it 'can gather items where a discount applies' do
+        expect(alaina_invoice1.gather_items_where_discount_applies).to eq("") 
+      end
     end
 
   end
