@@ -43,7 +43,6 @@ RSpec.describe 'Merchant Index Show Page' do
         within("#invoice_items") do
           expect(page).to have_content(gold_earrings.name)
           expect(page).to have_content(silver_necklace.name)
-          #checks we are not displaying items from a different invoice
           expect(page).to_not have_content(studded_bracelet.name)
           #checks we are not displaying items on this invoice from another merchant
           expect(page).to_not have_content(licorice.name)
@@ -120,11 +119,22 @@ RSpec.describe 'Merchant Index Show Page' do
           expect(page).to have_content("Total Revenue From This Invoice Discount Applied: $#{sprintf("%.2f",alaina_invoice1.calculate_discounted_invoice_revenue/100.to_f)}")
         end
       end
+
+      it 'Next to each invoice item I see a link to the show page for the bulk discount that was applied (if any)' do
+        visit merchant_invoice_path(jewlery_city, alaina_invoice1)
+        within("#item_#{gold_earrings.id}") do
+          expect(page).to have_link("See This Discount")
+        end
+        within("#item_#{silver_necklace.id}") do
+          expect(page).to have_link("See This Discount")
+        end
+
+      end
+
+
+
+
     end
-
-
-
-   
   end
 end
 
