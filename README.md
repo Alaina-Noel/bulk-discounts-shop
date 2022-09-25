@@ -1,12 +1,12 @@
 <div align="center">
 
-# Little Esty Shop 
+# Little Esty Shop with Bulk Discounts
  
-## [Take me to the site!](https://afternoon-wave-94167.herokuapp.com/admin)
+## [Take me to the site!](https://bulk-discounts2207.herokuapp.com/)
 
 <div style="color: lightblue">
 
-### "Little Esty Shop" is a group project that required us to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+### "Little Esty Shop Bulk Discounts is a project that began with a group and ended solo. The group portion required us to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices. The solo portion required me to build the bulk discounts portion on top of the previous code.
 </div>
 
 <img src="./doc/schema.jpg" alt="The schema of the project"/>
