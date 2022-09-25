@@ -67,7 +67,7 @@ RSpec.describe Item, type: :model do
           expect(studded_bracelet.discount_applied?).to eq(false)
         end
       
-
+      end
 
     end
   end
