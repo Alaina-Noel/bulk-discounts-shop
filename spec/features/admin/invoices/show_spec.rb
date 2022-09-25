@@ -27,7 +27,7 @@ RSpec.describe 'admin invoice show' do
     #this invoice contains an item belonging to this merchant, but no info should be should on invoice1 show page
     let!(:alainainvoice2_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: alaina_invoice2.id, item_id: studded_bracelet.id, quantity: 40, unit_price: 1500, status:"shipped" )}
 
-    it 'shows all invoice info' do
+    it 'shows all invoice info including two revenues: one with the discount and one without' do
         visit admin_invoice_path(alaina_invoice1)
         expect(page).to have_content("##{alaina_invoice1.id}")
         expect(page).to have_content("#{alaina_invoice1.status}")
@@ -35,6 +35,8 @@ RSpec.describe 'admin invoice show' do
         expect(page).to have_content("#{alaina.name}")
         expect(page).to_not have_content("#{alaina_invoice2.id}")
         expect(page).to have_content(sprintf("%.2f",alaina_invoice1.calculate_invoice_revenue/100.to_f))
+        expect(page).to have_content(sprintf("%.2f",alaina_invoice1.calculate_discounted_invoice_revenue/100.to_f))
+
     end
 
     describe 'invoice items' do
@@ -68,4 +70,5 @@ RSpec.describe 'admin invoice show' do
             expect(alaina_invoice1.status).to eq('in_progress')
         end
     end
+
 end

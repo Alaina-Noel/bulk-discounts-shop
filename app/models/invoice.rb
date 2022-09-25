@@ -29,8 +29,6 @@ class Invoice < ApplicationRecord
   end
 
   def discount_applied?(item)
-    # require 'pry' ; binding.pry
-    # !item.invoice_items.joins(:bulk_discounts).where("invoice_items.quantity >= bulk_discounts.quantity_threshold").empty?
     ids = item.invoice_items.joins(:bulk_discounts).select("invoice_items.id").where("invoice_items.quantity >= bulk_discounts.quantity_threshold").group("invoice_items.id").pluck(:id)
     ids.include?(item.invoice_items.first.id)
   end
