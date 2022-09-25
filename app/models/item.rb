@@ -19,8 +19,4 @@ class Item < ApplicationRecord
     InvoiceItem.select("invoice_items.*").where(item_id: self.id, invoice_id: invoice.id).order(created_at: :desc).first
   end
 
-  def discount_applied?
-    applied_discounts = merchant.invoice_items.joins(:bulk_discounts).select("invoice_items.id, (invoice_items.quantity * invoice_items.unit_price) * min(1 - (bulk_discounts.percentage_discount * .01)) as remaining_revenue").where("invoice_items.quantity >= bulk_discounts.quantity_threshold").group("invoice_items.id").pluck("invoice_items.id")
-    !self.invoice_items.where(id: applied_discounts).empty?
-  end
 end

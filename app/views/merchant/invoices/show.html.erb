@@ -34,11 +34,12 @@
           <%= f.hidden_field :invoice_id, value: @invoice.id %>
           <%= f.submit "Update Item Status"  %>
       </td>
-      <% if item.discount_applied?  %>
-      <td><%= "View Details" %></td>
-       <% end %>
+
+      <% if @invoice.discount_applied?(item)  %>
+        <td><%= link_to "View Details", merchant_invoices_path(@merchant) %></td>
       <% end %>
-    </li>
+
+  <% end %>
   <% end %>
 </table>
 
