@@ -108,12 +108,15 @@ RSpec.describe 'Merchant Index Show Page' do
         within("#item_#{studded_bracelet.id}") do
           expect(page).to_not have_link("View Details")
         end
+        save_and_open_page
         
         within("#item_#{silver_necklace.id}") do
           expect(page).to have_link("View Details")
           click_on("View Details")
           # expect(current_path).to eq(merchant_bulk_discount(jewlery_city, jcity_discount2))
           #TODO: make this test pass
+          #TODO: put pry in method refresh page
+          #TODO: open rails c and call the method on the item and the invoices
         end
 
         
