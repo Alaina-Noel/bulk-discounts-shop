@@ -184,9 +184,10 @@ RSpec.describe Invoice, type: :model do
       let!(:alainainvoice1_itemcandy) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: candy_canes.id, quantity: 1, unit_price: 1100, status:"packaged" )}
 
       it 'returns a boolean value to tell if an an item has had a discount applied to it' do
-        expect(alaina_invoice1.calculate_discounted_invoice_revenue).to eq(0)
+        expect(alaina_invoice1.calculate_discounted_wholeinvoice_revenue).to eq(26130)
 
       end
+    end
 
   end
 
