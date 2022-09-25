@@ -6,7 +6,7 @@
 
 <div style="color: lightblue">
 
-### "Little Esty Shop" is a group project that required us to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices.
+### "Little Esty Shop Bulk Discounts" started as a group project. The group portion required us to build a fictitious e-commerce platform where merchants and admins can manage inventory and fulfill customer invoices. The solo portion required building Bulk Discounts on top of the previous code.
 </div>
 
 <img src="./doc/schema.jpg" alt="The schema of the project"/>
