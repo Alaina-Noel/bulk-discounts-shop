@@ -13,16 +13,17 @@
 <h3>Customer:</h3>
 <p style='margin-left:20px'><%= @invoice.customer.name %></p>
 
-<h3>Itemson this Invoice </h3>
+<h3>Items on this Invoice </h3>
 <table id="invoice_items">
   <tr>
     <th>Item Name</th>
     <th>Quantity</th>
     <th>Unit Price</th>
     <th>Status</th>
+    <th>Discount Details</th>
   </tr>
   <% @invoice.merchant_items(@merchant).each do |item| %>
-    <tr  id="item_<%= item.id %>">
+    <tr id="item_<%= item.id %>">
     <td><%= item.name %></td>
       <td><%= item.invoice_item(@invoice).quantity %></td>
       <% if item.has_discount? %>
@@ -36,8 +37,12 @@
           <%= f.hidden_field :invoice_id, value: @invoice.id %>
           <%= f.submit "Update Item Status"  %>
       </td>
+
+      <% if @invoice.discount_applied?(item)  %>
+        <td><%= link_to "View Details", merchant_invoices_path(@merchant) %></td>
       <% end %>
-    </li>
+
+  <% end %>
   <% end %>
 </table>
 

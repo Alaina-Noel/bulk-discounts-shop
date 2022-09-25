@@ -31,25 +31,7 @@ RSpec.describe Item, type: :model do
     it { should validate_numericality_of(:unit_price) }
   end
 
-  before(:each) do
-    # @instance_var = Something.create!(input)
-  end
-
-  describe 'class methods' do
-    describe '#search' do
-      it 'returns partial matches' do
-       #method goes here
-      end
-    end
-  end
-
   describe 'instance methods' do
-    describe '#method_name' do
-     it 'description of method' do
-      #expect statement here
-     end
-    end
-
     describe '#invoice_item(invoice)' do
       it 'returns an InvoiceItem object given an invoice' do
         expect(rocker.invoice_item(gordy_inv1)).to eq(item_inv1)

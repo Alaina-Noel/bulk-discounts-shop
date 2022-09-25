@@ -28,9 +28,11 @@ class Invoice < ApplicationRecord
     merchant.invoice_items.joins(:bulk_discounts).select("invoice_items.id, (invoice_items.quantity * invoice_items.unit_price) * min(1 - (bulk_discounts.percentage_discount * .01)) as remaining_revenue").where("invoice_items.quantity >= bulk_discounts.quantity_threshold").group("invoice_items.id").sum(&:remaining_revenue).to_i 
   end
 
-  def gather_items_where_discount_applies
-    require 'pry' ; binding.pry #stopped here - need to figure out logic of displaying the invoice items.
-    invoice_items.joins(:bulk_discounts).where("invoice_items.quantity >= bulk_discounts.quantity_threshold").select("invoice_items.id, max(invoice_items.quantity * invoice_items.unit_price * (1 - (bulk_discounts.percentage_discount * .01))) as remaining_revenue").group("invoice_items.id")
+  def discount_applied?(item)
+    # require 'pry' ; binding.pry
+    # !item.invoice_items.joins(:bulk_discounts).where("invoice_items.quantity >= bulk_discounts.quantity_threshold").empty?
+    ids = item.invoice_items.joins(:bulk_discounts).select("invoice_items.id").where("invoice_items.quantity >= bulk_discounts.quantity_threshold").group("invoice_items.id").pluck(:id)
+    ids.include?(item.invoice_items.first.id)
   end
 
 end
