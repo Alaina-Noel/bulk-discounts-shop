@@ -31,25 +31,7 @@ RSpec.describe Item, type: :model do
     it { should validate_numericality_of(:unit_price) }
   end
 
-  before(:each) do
-    # @instance_var = Something.create!(input)
-  end
-
-  describe 'class methods' do
-    describe '#search' do
-      it 'returns partial matches' do
-       #method goes here
-      end
-    end
-  end
-
   describe 'instance methods' do
-    describe '#method_name' do
-     it 'description of method' do
-      #expect statement here
-     end
-    end
-
     describe '#invoice_item(invoice)' do
       it 'returns an InvoiceItem object given an invoice' do
         expect(rocker.invoice_item(gordy_inv1)).to eq(item_inv1)
@@ -62,7 +44,31 @@ RSpec.describe Item, type: :model do
         expect(rocker.best_sales_date).to_not eq("May 25, 2012")
       end
 
-      # add sad path tests
+      describe '#discount_applied?' do
+        let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
+  
+        let!(:jcity_discount1) {jewlery_city.bulk_discounts.create!(percentage_discount: 20, quantity_threshold: 10)}
+        let!(:jcity_discount2) {jewlery_city.bulk_discounts.create!(percentage_discount: 30, quantity_threshold: 15)}
+        
+        let!(:gold_earrings) { jewlery_city.items.create!(name: "Gold Earrings", description: "14k Gold 12' Hoops", unit_price: 12000) }
+        let!(:silver_necklace) { jewlery_city.items.create!(name: "Silver Necklace", description: "An everyday wearable silver necklace", unit_price: 22000) }
+        let!(:studded_bracelet) { jewlery_city.items.create!(name: "Studded Bracelet", description: "A dainty studded bracelet", unit_price: 1100) }
+  
+        let!(:alaina) { Customer.create!(first_name: "Alaina", last_name: "Kneiling")}
+        let!(:alaina_invoice1) { alaina.invoices.create!(status: "completed")}
+  
+        let!(:alainainvoice1_itemgold_earrings) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: gold_earrings.id, quantity: 12, unit_price: 1300, status:"packaged" )}
+        let!(:alainainvoice1_itemsilver_necklace) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: silver_necklace.id, quantity: 15, unit_price: 1300, status:"packaged" )}
+        let!(:alainainvoice1_itemstudded_bracelet) { InvoiceItem.create!(invoice_id: alaina_invoice1.id, item_id: studded_bracelet.id, quantity: 1, unit_price: 1100, status:"packaged" )}
+
+        it 'returns a boolean value to tell if an an item has had a discount applied to it' do
+          expect(gold_earrings.discount_applied?).to eq(true)
+          expect(silver_necklace.discount_applied?).to eq(true)
+          expect(studded_bracelet.discount_applied?).to eq(false)
+        end
+      
+
+
     end
   end
 
