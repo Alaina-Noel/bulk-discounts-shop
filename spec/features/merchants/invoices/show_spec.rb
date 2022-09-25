@@ -136,13 +136,16 @@ RSpec.describe 'Merchant Index Show Page' do
             expect(page).to have_content("Discount Details")
           end
 
-          within("#item_#{silver_necklace.id}") do
-            expect(page).to have_content("Discount Details")
-          end
-
           within("#item_#{studded_bracelet.id}") do
             expect(page).to_not have_content("Discount Details")
           end
+
+          within("#item_#{silver_necklace.id}") do
+            expect(page).to have_content("Discount Details")
+            # click_on("Discount Details")
+            # expect(current_path).to eq(merchant_bulk_discount(jewlery_city, jcity_discount2))
+          end
+
         end
       end
 
