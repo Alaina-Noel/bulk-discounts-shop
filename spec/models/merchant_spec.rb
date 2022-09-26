@@ -17,6 +17,9 @@ RSpec.describe Merchant, type: :model do
   let!(:bmv) { Merchant.create!(name: "Bavarian Motor Velocycles")}
   let!(:tersela) { Merchant.create!(name: "Tersela")}
 
+  let!(:jcity_discount1) {jewlery_city.bulk_discounts.create!(percentage_discount: 20, quantity_threshold: 10)}
+  let!(:jcity_discount2) {jewlery_city.bulk_discounts.create!(percentage_discount: 30, quantity_threshold: 15)}
+
   let!(:licorice) { carly_silo.items.create!(name: "Licorice Funnels", description: "Licorice Balls", unit_price: 1200, enabled: true) }
   let!(:peanut) { carly_silo.items.create!(name: "Peanut Bronzinos", description: "Peanut Caramel Chews", unit_price: 1500, enabled: true) }
   let!(:choco_waffle) { carly_silo.items.create!(name: "Chocolate Waffles Florentine", description: "Cholately Waffles of Deliciousness", unit_price: 900, enabled: false) }
@@ -200,5 +203,12 @@ RSpec.describe Merchant, type: :model do
         expect(jewlery_city.best_sales_date).to eq("May 25, 2020")
       end
     end
+
+    describe '#find_bulk_discount' do
+      it 'returns the date where given merchant had most sales' do
+        expect(jewlery_city.find_bulk_discount(gold_earrings)).to eq()
+      end
+    end
+
   end
 end
