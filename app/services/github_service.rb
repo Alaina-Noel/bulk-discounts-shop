@@ -8,4 +8,5 @@ class GitHubService
     #   HTTParty.get("https://api.github.com/repos/Astrid-Hecht/little-esty-shop/#{path}")
     # end
   end
+
 end

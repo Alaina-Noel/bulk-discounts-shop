@@ -79,6 +79,20 @@ RSpec.describe 'bulk discount index page', type: :feature do
         expect(page).to_not have_content("Quantity of Items: #{carlys_discount1.quantity_threshold}")
       end
 
+      it 'I see a section with a header of "Upcoming Holidays" In this section the name and date of the next 3 upcoming US holidays are listed.' do
+
+        visit merchant_bulk_discounts_path(carly_silo)
+        
+        expect(page).to have_content("Upcoming Holidays")
+
+        expect(page).to have_content("Columbus Day")
+        expect(page).to have_content("Veterans Day")
+        expect(page).to have_content("Thanksgiving Day")
+      end
     end
+
+
   end
 end
+
+
