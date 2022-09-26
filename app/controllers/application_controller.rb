@@ -1,7 +1,9 @@
 require_relative '../facades/github_facade'
+require_relative '../facades/holiday_facade'
+
 
 class ApplicationController < ActionController::Base
-  before_action :get_pr_total, :user_names, :repo_name, :user_commits
+  before_action :get_pr_total, :user_names, :repo_name, :user_commits, :next_holidays
 
   private
 
@@ -24,4 +26,9 @@ class ApplicationController < ActionController::Base
     @user_commits = {"LlamaBack"=>4, "Alaina-Noel"=>13, "ajkrumholz"=>10, "Astrid-Hecht"=>3}
     # @user_commits = GitHubFacade.user_commits
   end
+
+  def next_holidays
+    @next_holidays = HolidayFacade.next_3_holidays
+  end
+
 end
