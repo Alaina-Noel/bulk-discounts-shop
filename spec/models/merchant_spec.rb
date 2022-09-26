@@ -204,11 +204,5 @@ RSpec.describe Merchant, type: :model do
       end
     end
 
-    describe '#find_bulk_discount' do
-      it 'returns the date where given merchant had most sales' do
-        expect(jewlery_city.find_bulk_discount(gold_earrings)).to eq()
-      end
-    end
-
   end
 end
