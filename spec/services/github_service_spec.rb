@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'webmock/rspec'
+# require 'webmock/rspec'
 
 RSpec.describe 'github service' do
   describe 'class methods' do
