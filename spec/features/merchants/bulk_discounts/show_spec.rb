@@ -43,7 +43,6 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
       it "When I change any/all of the information and click submit, I am redirected to the bulk discount's show page & I see that the discount's attributes have been updated" do
         
         visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
-
         select('%99', from: :percentage_discount)
         fill_in('Quantity', with: 99)
         click_on "Save"
@@ -52,6 +51,19 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
 
         expect(page).to have_content("%99")
         expect(page).to have_content(99)
+      end
+
+      it "When I fill in the quantity with anything but an integer I am redirected to the same page" do #edge case not asked for
+        
+        visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
+
+        select('%98', from: :percentage_discount)
+        fill_in('Quantity', with: "hello")
+        click_on "Save"
+
+        expect(current_path).to eq(merchant_bulk_discount_path(carly_silo, carlys_discount1))
+
+        expect(page).to have_content("You must enter valid data to create a discount.")
       end
 
 
