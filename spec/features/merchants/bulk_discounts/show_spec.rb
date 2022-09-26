@@ -58,12 +58,12 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
         visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
 
         select('%98', from: :percentage_discount)
-        fill_in('Quantity', with: "hello")
+        fill_in('Quantity', with: "e")
         click_on "Save"
 
         expect(current_path).to eq(merchant_bulk_discount_path(carly_silo, carlys_discount1))
 
-        expect(page).to have_content("You must enter valid data to create a discount.")
+        expect(page).to_not have_content("Quantity of Items: 3")
       end
 
 

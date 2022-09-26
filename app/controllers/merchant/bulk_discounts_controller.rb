@@ -13,8 +13,14 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
   end
 
   def create
-    @bulk_discount = @merchant.bulk_discounts.create!(discount_params)
-    redirect_to(merchant_bulk_discounts_path(@merchant))
+    @merchant = Merchant.find(params[:merchant_id])
+    @bulk_discount = @merchant.bulk_discounts.new(discount_params)
+    if @bulk_discount.save
+      redirect_to(merchant_bulk_discounts_path(@merchant))
+    else
+      redirect_to(merchant_bulk_discounts_path(@merchant))
+      flash[:alert] = "You must enter valid data to create a discount."
+    end
   end
 
   def destroy
