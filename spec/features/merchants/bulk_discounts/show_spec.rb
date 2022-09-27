@@ -45,36 +45,39 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
       it "When I change any/all of the information and click submit, I am redirected to the bulk discount's show page & I see that the discount's attributes have been updated" do
         
         visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
-        select('%99', from: :percentage_discount)
+
         fill_in('Quantity', with: 99)
-        click_on "Save"
+        select('%99', from: "Percent Off")
+
+        click_on "Update Bulk discount"
 
         expect(current_path).to eq(merchant_bulk_discount_path(carly_silo, carlys_discount1))
 
-        expect(page).to have_content("%99")
         expect(page).to have_content(99)
+        expect(page).to have_content("%99")
+
       end
 
       it "When I fill in the quantity with anything but an integer I am redirected to the same page" do #edge case
         
         visit new_merchant_bulk_discount_path(carly_silo)
 
-        select('%98', from: :percentage_discount)
+        select('%98', from: "Percent Off")
         fill_in('Quantity', with: "e")
-        click_on "Save"
+        click_on "Create Bulk discount"
 
         expect(current_path).to eq(new_merchant_bulk_discount_path(carly_silo))
         expect(page).to_not have_content("Quantity of Items: e")
       end
 
-      it "When I change any/all of the information to invalid data and click submit the new data has not been saved." do #edge case
+      it "When I change any/all of the information to invalid data and click submit the new data has not been saved." do #sad path/edge case
         
         visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
 
-        select('%99', from: :percentage_discount)
+        select('%98', from: "Percent Off")
         fill_in('Quantity', with: "")
 
-        click_on "Save"
+        click_on "Update Bulk discount"
 
         expect(page).to have_content("%99")
         expect(current_path).to eq(edit_merchant_bulk_discount_path(carly_silo, carlys_discount1))

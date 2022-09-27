@@ -1,0 +1,8 @@
+<%= form_with model: [@merchant, @discount], url: url, local: :true  do |f| %>
+  <%= f.label :percentage_discount, "Percent Off" %>
+  <%= f.select :percentage_discount, (1..99).to_a.map{|n| ["%#{n}", n]} %>
+  <%= f.hidden_field :merchant_id %>
+  <%= f.label :quantity_threshold, "Quantity" %>
+  <%= f.number_field :quantity_threshold, min: 1  %>
+  <%= f.submit %>
+<% end %>
