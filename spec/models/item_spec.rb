@@ -68,7 +68,6 @@ RSpec.describe Item, type: :model do
         expect(gold_earrings.find_discount(alaina_invoice1)).to eq(jcity_discount1)
         expect(silver_necklace.find_discount(alaina_invoice1)).to eq(jcity_discount2)
         expect(studded_bracelet.find_discount(alaina_invoice1)).to eq(nil)
-
       end
     end
 
