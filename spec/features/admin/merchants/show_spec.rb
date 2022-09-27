@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Admin Merchant Show', type: :feature do
-  # let blocks
+
   let!(:carly) { Merchant.create!(name: "Carly Simon's Candy Silo")}
   let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
 

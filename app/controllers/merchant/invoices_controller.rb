@@ -8,5 +8,4 @@ class Merchant::InvoicesController < Merchant::BaseController
     @invoice = Invoice.find(params[:id])
   end
 
-  
 end

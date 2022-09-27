@@ -78,7 +78,7 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
 
         expect(page).to have_content("%99")
         expect(current_path).to eq(edit_merchant_bulk_discount_path(carly_silo, carlys_discount1))
-        expect(page).to have_content("You must fill in a quantity")git 
+        expect(page).to have_content("You must fill in a quantity")
       end
     end
   end
