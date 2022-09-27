@@ -66,14 +66,12 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
         expect(page).to_not have_content("Quantity of Items: 3")
       end
 
-      xit "When I change any/all of the information to invalid data and click submit, I am redirected to the current page and the new data has not been saved." do
+      it "When I change any/all of the information to invalid data and click submit the new data has not been saved." do
         
         visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
         select('%99', from: :percentage_discount)
         fill_in('Quantity', with: 1.2)
         click_on "Save"
-
-        expect(current_path).to eq(edit_merchant_bulk_discount_path(carly_silo, carlys_discount1))
 
         expect(page).to have_content("%99")
         expect(page).to_not have_content(1.2)
