@@ -1,5 +1,5 @@
 class Merchant::BulkDiscountsController < Merchant::BaseController
-  #merchant is being set in the base controller
+  #merchant is being set in the base controller, that is why it doesn't appear in each method.
 
   def index
     @discounts = @merchant.bulk_discounts
@@ -37,7 +37,6 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
     if @discount.update(discount_params)
       redirect_to merchant_bulk_discount_path(@merchant, @discount)
     else
-      require 'pry' ; binding.pry
       redirect_to edit_merchant_bulk_discount_path(@merchant, @discount)
       #flash messages will appear due to validation testing
     end
@@ -48,7 +47,5 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
   def discount_params
     params.permit(:quantity_threshold, :merchant_id, :percentage_discount)
   end
-
-
 
 end
