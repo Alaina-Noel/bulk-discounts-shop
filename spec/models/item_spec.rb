@@ -65,8 +65,10 @@ RSpec.describe Item, type: :model do
 
     describe '#find_discount' do
       it 'can find the discount that has been or will be applied to an item' do
-        expect(gold_earrings.find_discount).to eq(jcity_discount1)
-        expect(silver_necklace.find_discount).to_not eq(jcity_discount2)
+        expect(gold_earrings.find_discount(alaina_invoice1)).to eq(jcity_discount1)
+        expect(silver_necklace.find_discount(alaina_invoice1)).to eq(jcity_discount2)
+        expect(studded_bracelet.find_discount(alaina_invoice1)).to eq(nil)
+
       end
     end
 
