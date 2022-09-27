@@ -9,14 +9,13 @@
 
 <%content_for :aside do%>
 <h3>Top 5 Customers</h3>
-<div id='top_5_customers'>
-<% i = 1 %>
-<p><% @merchant.transactions_top_5.each_with_index do |customer, i| %></p>
-<p><%= i + 1 %>.<%= customer.first_name %> <%= customer.last_name %> - <%= customer.num_succesful_transactions %> purchases</p>
+  <div id='top_5_customers'>
+  <% i = 1 %>
+  <p><% @merchant.transactions_top_5.each_with_index do |customer, i| %></p>
+    <p><%= i + 1 %>.<%= customer.first_name %> <%= customer.last_name %> - <%= customer.num_succesful_transactions %> purchases</p>
+  <% end %>
+  </div>
 <% end %>
-</div>
-<% end %>
-
 
 <div id='ready_to_ship' style='max-width: 40vw; margin-top:37px'>
   <h3>Items Ready to Ship</h3>
