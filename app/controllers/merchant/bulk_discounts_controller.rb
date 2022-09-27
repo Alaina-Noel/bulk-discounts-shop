@@ -18,8 +18,8 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
     if @bulk_discount.save
       redirect_to(merchant_bulk_discounts_path(@merchant))
     else
-      redirect_to(merchant_bulk_discounts_path(@merchant))
-      flash[:alert] = "You must enter valid data to create a discount."
+      redirect_to(new_merchant_bulk_discount_path(@merchant))
+      #flash messages will appear due to validation testing
     end
   end
 
@@ -34,8 +34,13 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
 
   def update
     @discount = @merchant.bulk_discounts.find(params[:id])
-    @discount.update!(discount_params)
-    redirect_to merchant_bulk_discount_path(@merchant, @discount)
+    if @discount.update(discount_params)
+      redirect_to merchant_bulk_discount_path(@merchant, @discount)
+    else
+      require 'pry' ; binding.pry
+      redirect_to edit_merchant_bulk_discount_path(@merchant, @discount)
+      #flash messages will appear due to validation testing
+    end
   end
 
   private
