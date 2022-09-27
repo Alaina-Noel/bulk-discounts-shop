@@ -35,8 +35,8 @@
           <%= f.submit "Update Item Status"  %>
       </td>
       <td>
-      <% if @invoice.discount_applied?(item)  %>
-       <%= link_to "View Details", merchant_bulk_discount_path(@merchant, item.find_discount(@invoice)) %>
+      <% if item.find_discount(@invoice) != nil %>
+       <%= link_to "View Details", "/merchants/#{@merchant.id}/bulk_discounts/#{item.find_discount(@invoice).id}" %>
       <% end %>
       </td>
   <% end %>
