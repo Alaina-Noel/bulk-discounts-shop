@@ -109,6 +109,7 @@ RSpec.describe 'Merchant Index Show Page' do
         within("#item_#{gold_earrings.id}") do
           expect(page).to have_link("View Details")
           click_on("View Details")
+          
           expect(current_path).to eq(merchant_bulk_discount_path(jewlery_city, jcity_discount1))
         end
 
