@@ -38,7 +38,7 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
       redirect_to merchant_bulk_discount_path(@merchant, @discount)
     else
       redirect_to edit_merchant_bulk_discount_path(@merchant, @discount)
-      #flash messages will appear due to validation testing
+      flash[:notice] = "You must fill in a quantity"
     end
   end
 

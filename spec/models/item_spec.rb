@@ -12,7 +12,7 @@ RSpec.describe Item, type: :model do
     it { should validate_numericality_of(:unit_price) }
   end
   
-  describe 'invoice_tests_before_bulk_discounts' do
+  describe 'invoice_tests_without_bulk_discounts' do
     let!(:barry) { Merchant.create!(name: "Barry's Bonus Barn")}
     let!(:rocker) { barry.items.create!(name: "Rooster Rocker", description: "A big ol chair for a big ol porch", unit_price: 45000, enabled: true) }
     let!(:gordy) { Customer.create!(first_name: "Gordy 'Big Chairs'", last_name: "Howerton")}
@@ -45,8 +45,7 @@ RSpec.describe Item, type: :model do
     end
   end
 
-
-  describe "bulk_discount_methods" do
+  describe "invoices with bulk discounts involved" do
     let!(:jewlery_city) { Merchant.create!(name: "Jewlery City Merchant")}
   
     let!(:jcity_discount1) {jewlery_city.bulk_discounts.create!(percentage_discount: 20, quantity_threshold: 10)}
@@ -70,7 +69,5 @@ RSpec.describe Item, type: :model do
         expect(studded_bracelet.find_discount(alaina_invoice1)).to eq(nil)
       end
     end
-
   end
-
 end
