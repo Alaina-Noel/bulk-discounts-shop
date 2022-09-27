@@ -24,8 +24,10 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
 
         visit merchant_bulk_discount_path(carly_silo, carlys_discount1)
 
-        expect(page).to have_link("Edit")
-        click_link("Edit")
+        within('#edit_discount') do 
+          expect(page).to have_link("Edit")
+          click_link("Edit")
+        end
         expect(current_path).to eq(edit_merchant_bulk_discount_path(carly_silo, carlys_discount1))
         expect(page).to have_content("Quantity")
         expect(page).to have_content("Percent Off")
@@ -66,8 +68,7 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
         expect(page).to_not have_content("Quantity of Items: 3")
       end
 
-      it "When I change any/all of the information to invalid data and click submit the new data has not been saved." do 
-        #edge case
+      it "When I change any/all of the information to invalid data and click submit the new data has not been saved." do #edge case
         
         visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
 
