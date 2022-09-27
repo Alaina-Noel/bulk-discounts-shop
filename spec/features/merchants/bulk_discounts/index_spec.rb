@@ -40,8 +40,8 @@ RSpec.describe 'bulk discount index page', type: :feature do
         visit "/merchants/#{carly_silo.id}/bulk_discounts"
         expect(page).to have_link("Create a New Discount")
         click_link("Create a New Discount")
+
         expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts/new")
-        
         expect(page).to have_content("Percent Off")
         expect(page).to have_content("Quantity")
       end
@@ -69,8 +69,8 @@ RSpec.describe 'bulk discount index page', type: :feature do
         expect(page).to have_content("Quantity of Items: #{carlys_discount1.quantity_threshold}")
 
         within("#discount_#{carlys_discount1.id}") do 
-        expect(page).to have_button("Delete")
-        click_on("Delete")
+          expect(page).to have_button("Delete")
+          click_on("Delete")
         end
 
         expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts")
@@ -84,14 +84,11 @@ RSpec.describe 'bulk discount index page', type: :feature do
         visit merchant_bulk_discounts_path(carly_silo)
         
         expect(page).to have_content("Upcoming Holidays")
-
         expect(page).to have_content("Columbus Day")
         expect(page).to have_content("Veterans Day")
         expect(page).to have_content("Thanksgiving Day")
       end
     end
-
-
   end
 end
 

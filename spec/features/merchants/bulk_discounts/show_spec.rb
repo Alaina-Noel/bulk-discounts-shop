@@ -24,8 +24,10 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
 
         visit merchant_bulk_discount_path(carly_silo, carlys_discount1)
 
-        expect(page).to have_link("Edit")
-        click_link("Edit")
+        within('#edit_discount') do 
+          expect(page).to have_link("Edit")
+          click_link("Edit")
+        end
         expect(current_path).to eq(edit_merchant_bulk_discount_path(carly_silo, carlys_discount1))
         expect(page).to have_content("Quantity")
         expect(page).to have_content("Percent Off")
@@ -43,7 +45,6 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
       it "When I change any/all of the information and click submit, I am redirected to the bulk discount's show page & I see that the discount's attributes have been updated" do
         
         visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
-
         select('%99', from: :percentage_discount)
         fill_in('Quantity', with: 99)
         click_on "Save"
@@ -54,8 +55,31 @@ RSpec.describe 'merchant bulk discount show page', type: :feature do
         expect(page).to have_content(99)
       end
 
+      it "When I fill in the quantity with anything but an integer I am redirected to the same page" do #edge case
+        
+        visit new_merchant_bulk_discount_path(carly_silo)
 
+        select('%98', from: :percentage_discount)
+        fill_in('Quantity', with: "e")
+        click_on "Save"
 
+        expect(current_path).to eq(new_merchant_bulk_discount_path(carly_silo))
+        expect(page).to_not have_content("Quantity of Items: e")
+      end
+
+      it "When I change any/all of the information to invalid data and click submit the new data has not been saved." do #edge case
+        
+        visit edit_merchant_bulk_discount_path(carly_silo, carlys_discount1)
+
+        select('%99', from: :percentage_discount)
+        fill_in('Quantity', with: "")
+
+        click_on "Save"
+
+        expect(page).to have_content("%99")
+        expect(current_path).to eq(edit_merchant_bulk_discount_path(carly_silo, carlys_discount1))
+        expect(page).to have_content("You must fill in a quantity")git 
+      end
     end
   end
 end

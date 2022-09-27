@@ -39,6 +39,9 @@
 <%end%>
 
   <body>
+      <% flash.each do |type, message| %>
+      <p><%= message %></p>
+    <% end %>
     <article>
       <%= yield %>
       <div style='color:white'>.

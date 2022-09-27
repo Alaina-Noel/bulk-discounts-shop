@@ -19,4 +19,8 @@ class Item < ApplicationRecord
     InvoiceItem.select("invoice_items.*").where(item_id: self.id, invoice_id: invoice.id).order(created_at: :desc).first
   end
 
+  def find_discount(invoice)
+    self.bulk_discounts.where("bulk_discounts.quantity_threshold <= ?", self.invoice_items.find_by(invoice_id: invoice.id).quantity).order(percentage_discount: :desc).first
+  end
+
 end

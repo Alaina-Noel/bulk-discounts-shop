@@ -87,45 +87,44 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
       let!(:polina_invoice1_itemdainty_anklet) { InvoiceItem.create!(invoice_id: polina_invoice1.id, item_id: dainty_anklet.id, quantity: 6, unit_price: 270, status:1)}
       let!(:polina_invoice2_itemdainty_anklet) { InvoiceItem.create!(invoice_id: polina_invoice2.id, item_id: dainty_anklet.id, quantity: 1, unit_price: 270, status:1 )}
 
-      it 'Then I see the name of my merchant' do
+        it 'Then I see the name of my merchant' do
 
-        visit "/merchants/#{carly_silo.id}/dashboard"
+          visit "/merchants/#{carly_silo.id}/dashboard"
 
-        expect(page).to have_content("Carly Simon's Candy Silo")
-        expect(page).to_not have_content("Bavarian Motor Velocycles")
-      end
+          expect(page).to have_content("Carly Simon's Candy Silo")
+          expect(page).to_not have_content("Bavarian Motor Velocycles")
+        end
 
-      it 'Then I see link to my merchant items index (/merchants/merchant_id/items)' do
+        it 'Then I see link to my merchant items index (/merchants/merchant_id/items)' do
 
-        visit "/merchants/#{carly_silo.id}/dashboard"
+          visit "/merchants/#{carly_silo.id}/dashboard"
 
-        expect(page).to have_content("#{carly_silo.name}'s Items")
-        click_on("#{carly_silo.name}'s Items")
-        expect(current_path).to eq(merchant_items_path("#{carly_silo.id}"))
-      end
+          expect(page).to have_content("#{carly_silo.name}'s Items")
+          click_on("#{carly_silo.name}'s Items")
+          expect(current_path).to eq(merchant_items_path("#{carly_silo.id}"))
+        end
 
-      it 'And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)' do
+        it 'And I see a link to my merchant invoices index (/merchants/merchant_id/invoices)' do
 
-        visit "/merchants/#{carly_silo.id}/dashboard"
-        expect(page).to have_content("#{carly_silo.name}'s Invoices")
+          visit "/merchants/#{carly_silo.id}/dashboard"
+          expect(page).to have_content("#{carly_silo.name}'s Invoices")
 
-        click_on("#{carly_silo.name}'s Invoices")
-        expect(current_path).to eq(merchant_invoices_path("#{carly_silo.id}"))
-      end
+          click_on("#{carly_silo.name}'s Invoices")
+          expect(current_path).to eq(merchant_invoices_path("#{carly_silo.id}"))
+        end
 
-      it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
+        it 'Then I see the names of the top 5 customers who have conducted the largest number of successful transactions with my merchant' do
 
-        visit "/merchants/#{jewlery_city.id}/dashboard"
-        expect(page).to have_content("Top 5 Customers")
+          visit "/merchants/#{jewlery_city.id}/dashboard"
+          expect(page).to have_content("Top 5 Customers")
 
-        within('#top_5_customers') do 
-        expect(whitney.first_name).to appear_before(alaina.first_name)
-        expect(alaina.first_name).to appear_before(eddie.first_name)
-        expect(eddie.first_name).to appear_before(polina.first_name)
-        expect(polina.first_name).to appear_before(ryan.first_name)
-        expect(page).to_not have_content(leah.first_name)
-      end
-
+          within('#top_5_customers') do 
+          expect(whitney.first_name).to appear_before(alaina.first_name)
+          expect(alaina.first_name).to appear_before(eddie.first_name)
+          expect(eddie.first_name).to appear_before(polina.first_name)
+          expect(polina.first_name).to appear_before(ryan.first_name)
+          expect(page).to_not have_content(leah.first_name)
+        end
       end
 
       it 'And next to each customer name I see the number of successful transactions they have
@@ -149,8 +148,7 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         expect(page).to have_content("Items Ready to Ship")
       end
 
-      it " In that section I see a list of the names of all of my items that
-      have been ordered and have not yet been shipped" do
+      it " In that section I see a list of the names of all of my items that have been ordered and have not yet been shipped" do
 
       visit "/merchants/#{jewlery_city.id}/dashboard"
 
@@ -167,40 +165,40 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
 
       visit "/merchants/#{jewlery_city.id}/dashboard"
 
-      within('#ready_to_ship') do
-        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice1.id}")
-        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice2.id}")
-        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice3.id}")
-        expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice4.id}")
-        expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice1.id}")
-        expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice2.id}")
-        expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice3.id}")
-        expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice1.id}")
-        expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice2.id}")
-        expect(page).to_not have_content("Dainty Ankley - Invoice ##{alaina_invoice1.id}")
-        expect(page).to_not have_content("Dainty Ankley - Invoice ##{ryan_invoice1.id}")
-      end
+        within('#ready_to_ship') do
+          expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice1.id}")
+          expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice2.id}")
+          expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice3.id}")
+          expect(page).to have_content("Gold Earrings - Invoice ##{alaina_invoice4.id}")
+          expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice1.id}")
+          expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice2.id}")
+          expect(page).to have_content("Gold Studded Bracelet - Invoice ##{eddie_invoice3.id}")
+          expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice1.id}")
+          expect(page).to have_content("Dainty Ankley - Invoice ##{polina_invoice2.id}")
+          expect(page).to_not have_content("Dainty Ankley - Invoice ##{alaina_invoice1.id}")
+          expect(page).to_not have_content("Dainty Ankley - Invoice ##{ryan_invoice1.id}")
+        end
       end
 
       it "And each invoice id is a link to my merchant's invoice show page" do
 
-        visit "/merchants/#{jewlery_city.id}/dashboard"
+      visit "/merchants/#{jewlery_city.id}/dashboard"
 
-        within('#ready_to_ship') do
-          expect(page).to have_link("#{alaina_invoice1.id}")
-          expect(page).to have_link("#{alaina_invoice2.id}")
-          expect(page).to have_link("#{alaina_invoice3.id}")
-          expect(page).to have_link("#{alaina_invoice4.id}")
-          expect(page).to have_link("#{eddie_invoice1.id}")
-          expect(page).to have_link("#{eddie_invoice2.id}")
-          expect(page).to have_link("#{polina_invoice1.id}")
-          expect(page).to have_link("#{polina_invoice2.id}")
-          expect(page).to have_link("#{alaina_invoice4.id}")
-          expect(page).to_not have_link("#{ryan_invoice1.id}")
-          
-          click_on("#{alaina_invoice1.id}")
-          expect(current_path).to eq("/merchants/#{jewlery_city.id}/invoices/#{alaina_invoice1.id}")
-          end
+      within('#ready_to_ship') do
+        expect(page).to have_link("#{alaina_invoice1.id}")
+        expect(page).to have_link("#{alaina_invoice2.id}")
+        expect(page).to have_link("#{alaina_invoice3.id}")
+        expect(page).to have_link("#{alaina_invoice4.id}")
+        expect(page).to have_link("#{eddie_invoice1.id}")
+        expect(page).to have_link("#{eddie_invoice2.id}")
+        expect(page).to have_link("#{polina_invoice1.id}")
+        expect(page).to have_link("#{polina_invoice2.id}")
+        expect(page).to have_link("#{alaina_invoice4.id}")
+        expect(page).to_not have_link("#{ryan_invoice1.id}")
+        
+        click_on("#{alaina_invoice1.id}")
+        expect(current_path).to eq("/merchants/#{jewlery_city.id}/invoices/#{alaina_invoice1.id}")
+        end
       end
 
       it "next to each item in the ready to ship section I see the date that invoice was created formatted correctly and ordered from oldest to newest" do
@@ -229,7 +227,6 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         end
       end
 
-
       it 'Then I see a link to view all my discounts, When I click this link, Then I am taken to my bulk discounts index page' do
 
         visit "/merchants/#{carly_silo.id}/dashboard"
@@ -238,7 +235,6 @@ RSpec.describe 'merchant dashboard show page', type: :feature do
         click_link("#{carly_silo.name}'s Discounts")
 
         expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts")
-
       end
     end
   end

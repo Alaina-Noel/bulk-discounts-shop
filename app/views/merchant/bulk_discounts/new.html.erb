@@ -4,8 +4,8 @@
 
   <%= f.hidden_field :merchant_id, value: @merchant.id %>
 
-  <%= f.label :quantity, "Quantity" %>
-  <%= f.text_field :quantity %>
+  <%= f.label :quantity_threshold, "Quantity" %>
+  <%= f.number_field :quantity_threshold, min: 1 %>
 
   <%= f.submit %>
 <% end %>
