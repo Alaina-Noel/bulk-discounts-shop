@@ -50,9 +50,9 @@ RSpec.describe 'bulk discount index page', type: :feature do
 
         visit new_merchant_bulk_discount_path(carly_silo)
 
-        select('%42', from: :percentage_discount)
+        select('%42', from: "Percent Off")
         fill_in('Quantity', with: 22)
-        click_on "Save"
+        click_on "Create Bulk discount"
 
         expect(current_path).to eq("/merchants/#{carly_silo.id}/bulk_discounts")
 

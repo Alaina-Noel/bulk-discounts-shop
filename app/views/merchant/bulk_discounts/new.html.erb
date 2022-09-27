@@ -1,8 +1,1 @@
-<%= form_with url: merchant_bulk_discounts_path(@merchant), method: :post, local: true  do |f| %>
-  <%= f.label :percentage_discount, "Percent Off" %>
-  <%= f.select :percentage_discount, (1..99).to_a.map{|n| ["%#{n}", n]} %>
-  <%= f.hidden_field :merchant_id, value: @merchant.id %>
-  <%= f.label :quantity_threshold, "Quantity" %>
-  <%= f.number_field :quantity_threshold, min: 1 %>
-  <%= f.submit %>
-<% end %>
+<%= render partial: 'discount_form', locals: {model: @merchant, method: :post, url: merchant_bulk_discounts_path(@merchant), button_text: 'Save' }  %>
