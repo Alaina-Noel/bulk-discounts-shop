@@ -136,12 +136,12 @@ RSpec.describe Invoice, type: :model do
 
       it 'can calculate the invoice revenue for the merchant from this invoice' do
         expect(alaina_invoice1.calculate_revenue_for(jewlery_city)).to eq(37211)
-        expect(alaina_invoice1.calculate_revenue_for(carly_silo)).to eq(999)
+        expect(alaina_invoice1.calculate_revenue_for(carly_silo)).to eq(999) #edge case
       end
 
       it 'can calculate the discounted invoice revenue for the merchant from this invoice' do
         expect(alaina_invoice1.calculate_discounted_invoice_revenue(jewlery_city)).to eq(28241)
-        expect(alaina_invoice1.calculate_discounted_invoice_revenue(carly_silo)).to eq(999)
+        expect(alaina_invoice1.calculate_discounted_invoice_revenue(carly_silo)).to eq(999) #edge case
       end   
 
       it 'returns the total amount of revenue generated from an entire invoice for all merchants after all discounts have been applied' do

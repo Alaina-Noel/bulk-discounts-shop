@@ -46,8 +46,6 @@ class Merchant::BulkDiscountsController < Merchant::BaseController
   private
   
   def discount_params
-    # require 'pry' ; binding.pry
-    # params.permit(:quantity_threshold, :merchant_id, :percentage_discount)
     params.require(:bulk_discount).permit(:quantity_threshold, :merchant_id, :percentage_discount)
   end
 
